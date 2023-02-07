@@ -1,0 +1,17 @@
+<h1>Spaceships</h1>
+<table>
+    <tr>
+        <th>Color</th>
+        <th>Maximum Speed</th>
+        <th>Date of Manufacture</th>
+        <th>Has Pulse Laser</th>
+    </tr>
+    {% for spaceship in spaceships %}
+    <tr>
+        <td>{{ spaceship.colour }}</td>
+        <td>{{ spaceship.max_speed }}</td>
+        <td>{{ spaceship.date_of_manufacture }}</td>
+        <td>{{ spaceship.has_pulse_laser }}</td>
+    </tr>
+    {% endfor %}
+</table>
