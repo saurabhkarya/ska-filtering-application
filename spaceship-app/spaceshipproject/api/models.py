@@ -17,7 +17,7 @@ class Spaceship(models.Model):
     ]
 
     # defining the fields
-    colour = models.CharField(max_length=1, choices=COLOURS)
+    colour = models.CharField(max_length=50, choices=COLOURS)
     max_speed = models.IntegerField(validators=[
         MinValueValidator(50),
         MaxValueValidator(200)

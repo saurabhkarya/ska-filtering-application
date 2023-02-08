@@ -1,4 +1,13 @@
 <h1>Spaceships</h1>
+
+<!-- form user submits -->
+<form method="get">
+    <!-- outputs the form as paragraphs -->
+    {{ form.as_p }}
+    <input type="submit" value="Filter">
+</form>
+
+<!-- table that is returned -->
 <table>
     <tr>
         <th>Color</th>
@@ -6,7 +15,7 @@
         <th>Date of Manufacture</th>
         <th>Has Pulse Laser</th>
     </tr>
-    {% for spaceship in spaceships %}
+    {% for spaceship in ss %}
     <tr>
         <td>{{ spaceship.colour }}</td>
         <td>{{ spaceship.max_speed }}</td>

@@ -1,6 +1,11 @@
 from django import forms
 from .models import Spaceship
 
-# class ss_form(forms.Form):
-#     # defining the colour field
 
+class spaceships_form(forms.Form):
+    # defining the colour field
+    colour = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        choices=Spaceship.COLOURS
+    )

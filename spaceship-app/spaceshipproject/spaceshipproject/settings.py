@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api'
+    'api',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -125,12 +126,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATABASES = {
-            'default': {
-              'ENGINE': 'django.db.backends.postgresql_psycopg2',
-              'NAME': 'spaceships',
-              'USER': 'mlz',
-              'PASSWORD': 'password',
-              'HOST': 'localhost',
-              'PORT': '5432',
-              }
-            }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'spaceships',
+        'USER': 'mlz',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}

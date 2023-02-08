@@ -1,10 +1,12 @@
+Note: using SS instead of Spaceships
+
+
+## Setting Up the Environment and Files
 1. Figure out the Technologies required for the Task:
 * Front-end Framework: **React**
 * Back-end Framework: **Django** or Flask
 * Database: **PostgreSQL**
 * Axios for making API calls
-
-
 
 2.  Create the development environment: React, Axios, Virtual Env, Django
 
@@ -62,3 +64,16 @@
 11. In spaceshipproject/urls.py create a URL pattern that maps to api.view
 12. in api/urls.py reference the html file in Templates
 13. Create a Test to make sure the template html is rendered in tests.py
+
+## Creating a form for MLZ to submit choices
+
+# Trying out colour
+14. Create a form in forms.py where the user can submit their choices for colour
+15. Create a function in views.py that processes the form and checks it against the objects in the db, then returns the dictionary with the spaceship
+16. In the HTML template add in the form with a button for submitting the form (to generate the query)
+
+# Creating the React App
+1. Run the below to make sure your React app is working:
+        npm start
+2. Create a file to put in your react code for the spaceships: Spaceships.js
+3. 
