@@ -7,9 +7,10 @@ const ColourCheckboxes = ({
 }) => {
   return (
     <div>
+      <h2>Colour</h2>
       <label>
         <input type="checkbox" onChange={handleSelectAll} />
-        Select All
+        Select All/None
       </label>
       {colours.map(([value, label]) => (
         <label key={value}>

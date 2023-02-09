@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ColourCheckboxes from "./ColourCheckboxes";
+import SpeedInput from "./SpeedInput";
+import ManufactureDateInput from "./ManufactureDateInput";
+import PulseLaserInput from "./PulseLaserInput";
 
 // List of all potential colours
 const COLOURS = [
@@ -17,8 +20,15 @@ const Spaceships = () => {
   const [spaceships, setSpaceships] = useState([]);
   const [queryString, setQueryString] = useState("");
   const [selectedColors, setSelectedColors] = useState({});
+  const [selectedSpeedOption, setSelectedSpeedOption] = useState("");
+  const [selectedDateOption, setSelectedDateOption] = useState("");
+  const [selectedPulseOption, setSelectedPulseOption] = useState("");
+  const [speed, setSpeed] = useState(0);
+  const [date, setDate] = useState("");
+  const [filterClicked, setFilterClicked] = useState(0);
 
   useEffect(() => {
+    console.log(queryString);
     if (queryString) {
       fetch(`http://127.0.0.1:8000${queryString}`, {
         method: "GET",
@@ -36,7 +46,7 @@ const Spaceships = () => {
           console.error("Error filtering spaceships:", error);
         });
     }
-  }, [queryString]);
+  }, [queryString, filterClicked]);
 
   const handleSubmit = (event) => {
     // Stop reloading the page
@@ -45,15 +55,63 @@ const Spaceships = () => {
     // Reset the spaceships array so existing results are not shown
     setSpaceships([]);
 
-    // Serialize the form data
-    const formData = new FormData(event.target);
+    // Reset the query string to an empty string
+    setQueryString("");
 
-    // Generate the query string based on the form
-    let queryParams = new URLSearchParams(formData).toString();
+    // Generate the query string
+    let queryParams = "";
+    Object.entries(selectedColors).forEach(([colour, isSelected]) => {
+      if (isSelected) {
+        queryParams += `colour=${colour}&`;
+      }
+    });
+    if (selectedSpeedOption === "less_than") {
+      queryParams += `speed_filter=less_than&max_speed=${speed}`;
+    } else if (selectedSpeedOption === "more_than") {
+      queryParams += `speed_filter=more_than&max_speed=${speed}`;
+    } else if (selectedSpeedOption === "exactly") {
+      queryParams += `speed_filter=exactly&max_speed=${speed}`;
+    }
+
+    if (selectedDateOption === "before") {
+      queryParams += `&date_filter=before&date=${date}`;
+    } else if (selectedDateOption === "after") {
+      queryParams += `&date_filter=after&date=${date}`;
+    } else if (selectedDateOption === "exact_date") {
+      queryParams += `&date_filter=exact_date&date=${date}`;
+    }
+
+    if (selectedPulseOption === "yes") {
+      queryParams += `&pulse=yes`;
+    } else if (selectedPulseOption === "no") {
+      queryParams += `&pulse=no`;
+    }
+
     setQueryString(`/api/spaceships/filter/?${queryParams}`);
+    setFilterClicked(filterClicked + 1);
   };
 
-  // Update the form data when a checkbox is checked
+  const handleSpeedRadioChange = (event) => {
+    setSelectedSpeedOption(event.target.value);
+  };
+
+  const handleDateRadioChange = (event) => {
+    setSelectedDateOption(event.target.value);
+  };
+
+  const handlePulseRadioChange = (event) => {
+    setSelectedPulseOption(event.target.value);
+  };
+
+  const handleSpeedChange = (event) => {
+    setSpeed(event.target.value);
+  };
+
+  const handleManufactureDateChange = (event) => {
+    setDate(event.target.value);
+  };
+
+  // Update the selectedColors state when a checkbox is checked
   const handleChange = (event) => {
     const { name, value, checked } = event.target;
     setSelectedColors((prevSelectedColors) => {
@@ -89,6 +147,22 @@ const Spaceships = () => {
           handleSelectAll={handleSelectAll}
           selectedColors={selectedColors}
         />
+        <SpeedInput
+          handleSpeedRadioChange={handleSpeedRadioChange}
+          speed={speed}
+          selectedSpeedOption={selectedSpeedOption}
+          handleSpeedChange={handleSpeedChange}
+        />
+        <ManufactureDateInput
+          handleDateRadioChange={handleDateRadioChange}
+          date={date}
+          selectedDateOption={selectedDateOption}
+          handleManufactureDateChange={handleManufactureDateChange}
+        />
+        <PulseLaserInput
+          handlePulseRadioChange={handlePulseRadioChange}
+          selectedPulseOption={selectedPulseOption}
+        />
         <input type="submit" value="Filter" />
       </form>
       <div>
@@ -111,7 +185,7 @@ const Spaceships = () => {
                 <td>{spaceship.colour}</td>
                 <td>{spaceship.max_speed}</td>
                 <td>{spaceship.date_of_manufacture}</td>
-                <td>{spaceship.has_pulse_laser}</td>
+                <td>{spaceship.has_pulse_laser ? <p>Yes</p> : <p>No</p>}</td>
               </tr>
             ))}
           </tbody>
