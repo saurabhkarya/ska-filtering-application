@@ -5,6 +5,11 @@ from django.core.validators import MaxValueValidator
 
 # creating a model for a spaceship
 class Spaceship(models.Model):
+
+    class SpaceshipObjects(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset()
+
     COLOURS = [
         # colour choices of a rainbow
         ('Red', 'Red'),
@@ -24,10 +29,9 @@ class Spaceship(models.Model):
     ])
     date_of_manufacture = models.DateField()
     has_pulse_laser = models.BooleanField()
+    objects = models.Manager()
 
     # labelling the object
+
     def __str__(self):
-        self.color, 
-        self.max_speed, 
-        self.manufacture_date, 
-        self.pulse_laser
+        return f"{self.colour}, {self.max_speed}, {self.date_of_manufacture}, {self.has_pulse_laser}"

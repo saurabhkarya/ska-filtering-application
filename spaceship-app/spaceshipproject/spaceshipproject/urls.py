@@ -18,5 +18,5 @@ from django.urls import include, path
 
 # takes the urls ffrom the api app and includes them in the project
 urlpatterns = [
-    path('', include('api.urls')),
+    path('api/', include('api.urls'))
 ]
