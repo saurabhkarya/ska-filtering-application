@@ -67,15 +67,37 @@ Note: using SS instead of Spaceships
 
 ## Creating a form for MLZ to submit choices
 
-# Trying out colour
-14. Create a form in forms.py where the user can submit their choices for colour
-15. Create a function in views.py that processes the form and checks it against the objects in the db, then returns the dictionary with the spaceship
-16. In the HTML template add in the form with a button for submitting the form (to generate the query)
+### Back-end - Django
+1. Create a form in forms.py where the user can submit their choices for colour
+2. Create a function in views.py that processes the form and checks it against the objects in the db, then returns the dictionary with the spaceship
+3. In the HTML template add in the form with a button for submitting the form (to generate the query)
+4. After this Django test succeeds then let's make the API endpoint
+5. Create the Filter API in views.py
+    - Add a queryset object to take in all the Spaceship Objects
+    - Create a serializer class to turn it into a JSON format to be sent via API
+    - Define the GET request function get_queryset(self) which will take in the request and filter the data
+    - For **Colours**; we need to retrieve the query parameters, because multiple colours can be submitted in the form, we need to use getlist to get the list of colours and filter if colour__in colours.
+    - For **Max Speed**; we need to get whether it is more than/less than/exactly the speed as one query paramter, and then get the input of speed MLZ would like to put in. We can use the filter function again here with "..lt" and "..gt" .etc
+    - For **Manufacture Data**; similar to Max Speed, this needs a filter with before/after/exactly on the date, the only difference here is that it needs to convert the date from the query paramaters to a real date object for the database.
+    - For **Pulse Laser**; This is a simple if yes, than return the spaceship objects that are true and if no, return the spaceship objects that are false.
+    - We also have to create a list class that takes in the request and calls the get_queryset function, serializes the data and then sends the response to the Client.
+6. We should add this function as a endpoint url in urls.py
+7. Next we should test all these endpoints with Postman with some dummy data to make sure that the requests are working.
 
-# Creating the React App
+### Front-end - React
 1. Run the below to make sure your React app is working:
         npm start
-2. Create a file to put in your react code for the spaceships: Spaceships.js
+2. Create a file to put in your react code for the spaceships: Spaceships.js, and link it into App.js
+3. 
+
+
+## Limitations of the Project
+- Due to limited time not enough testing done on the front-end, not enough edge cases
+- Project should be packaged in a Docker container
+- I should have mapped out the question first before "brute-forcing" it, at the end of the project I realised I forgot the case in which Spaceships may have multiple colours (many-to-many db relationship) and that Spaceships should have a name - needed to first map out the perspective of the user
+- Spaceships.js is too big, I maybe could separate it with functions in other file
+
+
 
 
  
