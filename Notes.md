@@ -76,4 +76,6 @@ Note: using SS instead of Spaceships
 1. Run the below to make sure your React app is working:
         npm start
 2. Create a file to put in your react code for the spaceships: Spaceships.js
-3. 
+
+
+ 

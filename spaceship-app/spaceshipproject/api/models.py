@@ -22,6 +22,7 @@ class Spaceship(models.Model):
     ]
 
     # defining the fields
+    name = models.CharField(max_length=50, default="Spaceship")
     colour = models.CharField(max_length=50, choices=COLOURS)
     max_speed = models.IntegerField(validators=[
         MinValueValidator(50),
@@ -34,4 +35,4 @@ class Spaceship(models.Model):
     # labelling the object
 
     def __str__(self):
-        return f"{self.colour}, {self.max_speed}, {self.date_of_manufacture}, {self.has_pulse_laser}"
+        return f"{self.name}, {self.colour}, {self.max_speed}, {self.date_of_manufacture}, {self.has_pulse_laser}"

@@ -16,7 +16,7 @@ const COLOURS = [
 ];
 
 const Spaceships = () => {
-  const [formData, setFormData] = useState({});
+  // const [formData, setFormData] = useState({});
   const [spaceships, setSpaceships] = useState([]);
   const [queryString, setQueryString] = useState("");
   const [selectedColors, setSelectedColors] = useState({});
@@ -52,6 +52,15 @@ const Spaceships = () => {
     // Stop reloading the page
     event.preventDefault();
 
+    // Validate speed
+    if (
+      (speed < 50 && selectedSpeedOption === "less_than") ||
+      (speed > 200 && selectedSpeedOption === "more_than")
+    ) {
+      alert("Speed must be between 50 and 200");
+      return;
+    }
+
     // Reset the spaceships array so existing results are not shown
     setSpaceships([]);
 
@@ -60,6 +69,7 @@ const Spaceships = () => {
 
     // Generate the query string
     let queryParams = "";
+    let parsedQuery = "";
     Object.entries(selectedColors).forEach(([colour, isSelected]) => {
       if (isSelected) {
         queryParams += `colour=${colour}&`;
