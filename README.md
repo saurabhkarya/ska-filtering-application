@@ -25,3 +25,6 @@ To run the Application:
 *Note: If required - to access the db the username and password are:
         'USER': 'mlz',
         'PASSWORD': 'password'*
+
+Application should look like:
+![example_image](/images/app_example.png)

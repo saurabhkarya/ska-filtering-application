@@ -1,4 +1,5 @@
-// Add a new prop to receive the selected checkboxes
+import "./FormStyles.css";
+
 const ColourCheckboxes = ({
   colours,
   handleChange,
@@ -6,24 +7,26 @@ const ColourCheckboxes = ({
   selectedColors,
 }) => {
   return (
-    <div>
-      <h2>Colour</h2>
-      <label>
-        <input type="checkbox" onChange={handleSelectAll} />
-        Select All/None
-      </label>
-      {colours.map(([value, label]) => (
-        <label key={value}>
-          <input
-            type="checkbox"
-            name={label}
-            value={value}
-            onChange={handleChange}
-            checked={selectedColors[label] || false}
-          />
-          {label}
+    <div className="FormSection">
+      <h2>What colour would you like?</h2>
+      <section className="CheckboxSection">
+        {colours.map(([value, label]) => (
+          <label key={value}>
+            <input
+              type="checkbox"
+              name={label}
+              value={value}
+              onChange={handleChange}
+              checked={selectedColors[label] || false}
+            />
+            {label}
+          </label>
+        ))}
+        <label>
+          <input type="checkbox" onChange={handleSelectAll} />
+          Select All/None
         </label>
-      ))}
+      </section>
     </div>
   );
 };

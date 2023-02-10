@@ -1,0 +1,50 @@
+h2 {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.FormSection {
+    width: 70%;
+}
+
+.FormSection h2 {
+    text-align: left;
+    padding: 0 0 16px 0 ;
+}
+
+.CheckboxSection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 100px;
+    gap: 16px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+    border-radius: 4px;
+    border: 1px solid #7F7F7F;
+}
+
+input[type="checkbox"]+label {
+    font-weight: normal;
+}
+
+.ColourSection input[type="checkbox"] {
+    margin: 0 8px;
+}
+
+input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: purple;
+}

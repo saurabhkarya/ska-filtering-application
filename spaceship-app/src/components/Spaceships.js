@@ -3,6 +3,7 @@ import ColourCheckboxes from "./ColourCheckboxes";
 import SpeedInput from "./SpeedInput";
 import ManufactureDateInput from "./ManufactureDateInput";
 import PulseLaserInput from "./PulseLaserInput";
+import "./Spaceships.css";
 
 // List of all potential colours
 const COLOURS = [
@@ -149,7 +150,10 @@ const Spaceships = () => {
   return (
     // Render the form and the table of spaceships
     <div>
-      <h1>Spaceships</h1>
+      <header>
+        <h2>Mr Little Z's</h2>
+        <h1>Spaceships</h1>
+      </header>
       <form onSubmit={handleSubmit}>
         <ColourCheckboxes
           colours={COLOURS}
@@ -173,38 +177,43 @@ const Spaceships = () => {
           handlePulseRadioChange={handlePulseRadioChange}
           selectedPulseOption={selectedPulseOption}
         />
-        <input type="submit" value="Filter" />
+        <input className="FilterButton" type="submit" value="Search" />
       </form>
       <div>
-        <p>Query string: {queryString}</p>
+        <h3>Query string: {queryString}</h3>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Color</th>
-            <th>Maximum Speed</th>
-            <th>Date of Manufacture</th>
-            <th>Has Pulse Laser</th>
-          </tr>
-        </thead>
-        {/* If there is a Spaceship map the columns to the results */}
-        {spaceships.length ? (
-          <tbody>
-            {spaceships.map((spaceship) => (
-              <tr key={spaceship.id}>
-                <td>{spaceship.colour}</td>
-                <td>{spaceship.max_speed}</td>
-                <td>{spaceship.date_of_manufacture}</td>
-                <td>{spaceship.has_pulse_laser ? <p>Yes</p> : <p>No</p>}</td>
-              </tr>
-            ))}
-          </tbody>
-        ) : (
-          <tbody>
-            <tr> </tr>
-          </tbody>
-        )}
-      </table>
+      <section className="ResultsSection">
+        <h2 className="ResultsTitle">Results</h2>
+        <table className="SpaceshipTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Color</th>
+              <th>Maximum Speed</th>
+              <th>Date of Manufacture</th>
+              <th>Has Pulse Laser</th>
+            </tr>
+          </thead>
+          {/* If there is a Spaceship map the columns to the results */}
+          {spaceships.length ? (
+            <tbody>
+              {spaceships.map((spaceship) => (
+                <tr key={spaceship.id}>
+                  <td>{spaceship.name}</td>
+                  <td>{spaceship.colour}</td>
+                  <td>{spaceship.max_speed}</td>
+                  <td>{spaceship.date_of_manufacture}</td>
+                  <td>{spaceship.has_pulse_laser ? <p>Yes</p> : <p>No</p>}</td>
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            <tbody>
+              <tr> </tr>
+            </tbody>
+          )}
+        </table>
+      </section>
     </div>
   );
 };
