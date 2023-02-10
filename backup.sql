@@ -326,7 +326,9 @@ ALTER TABLE public.django_session OWNER TO mlz;
 --
 
 COPY public.api_spaceship (id, colour, max_speed, date_of_manufacture, has_pulse_laser, name) FROM stdin;
-1	Red	85	2023-08-02	t	Spaceship
+3	Red	85	2020-08-02	t	Mascot
+2	Blue	75	2019-09-03	f	Campbelltown
+1	Green	197	2001-08-06	t	Sydney
 \.
 
 
