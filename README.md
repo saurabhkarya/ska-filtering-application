@@ -1,4 +1,4 @@
-<h1>Mr Little Z's Spaceships Filtering Application</h1>
+<h1>Mr Little Z's Spaceships Filtering Application :rocket: </h1>
 
 To run the Application:
 
